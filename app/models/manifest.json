@@ -1,0 +1,27 @@
+{
+  "files": {
+    "models/sofa/model.ckpt": "612cb69ef3503befc43286f0d90893b4b3ad959df07ed08799dba2bea69d2b51",
+    "models/separation/mel_band_roformer_karaoke_aufr33_viperx_sdr_10.1956_config.yaml": "b35077d94861f068097cce1a5e54633c055e7dcc2613eade4e4dc7c7c9c3f48b",
+    "models/separation/model_bs_roformer_ep_317_sdr_12.9755.ckpt": "5b84f37e8d444c8cb30c79d77f613a41c05868ff9c9ac6c7049c00aefae115aa",
+    "models/separation/model_bs_roformer_ep_317_sdr_12.9755.yaml": "2bfdd16c656bd9519aba757cc4f8834b7ede675eb1e00ec4772d74ae1c41af7f",
+    "models/separation/mel_band_roformer_karaoke_aufr33_viperx_sdr_10.1956.ckpt": "1de20d459332fe8869aeb01327a31df0032262706e1365114e852dc271779813",
+    "models/tifa/model.pt": "20a0bf2ed21dd2d7160bea76e1805db5365e0339739efd2ada50f83eec879057",
+    "models/tifa/evaluation-english.txt": "b9e851786ff79ca102c3031ab43df467281964e2b077f3cd3cda984c6f1054fc",
+    "models/tifa/vocabulary.json": "b1e471955bcfcacc5552f586cff4adbd4bd7e0069ab59935f08a2bc29a485d35",
+    "models/tifa/g2p-zh-en.yaml": "e9ecf3fe3bec10f751fd81ed14615bac2b8af27c1377f03f975ab80e6048ea4f",
+    "models/tifa/config.yaml": "30b0f4e6dccf63f737c276232bf223e8dd8658ba9af234be1ebdaa51e6178f42",
+    "models/tifa/dictionaries/ds-zh-pinyin-lite.txt": "1d52f8c9c7821edf46bac484229c0695e93a37a9644c6ff6cfc5bc3b09a245ae",
+    "models/tifa/dictionaries/jyutping_dict.txt": "21f6e62320b454a3fec292d227af14e2ba6ec81fe51f1894138227703975475a",
+    "models/tifa/dictionaries/ds_cmudict-07b.txt": "6604680f94ad57fcdbdc359d867e9f8d2267965f8793bcdbfbbc135c54c49903",
+    "models/tifa/dictionaries/japanese_dict_full.txt": "96812fcac957d4d393f5ca2d605f04773824a71d1b51175f5b5eda10281298db",
+    "models/tifa/assets/LstmG2p-Eng/decoder.onnx": "b5c7e48bd08b4b1d4e1449fdf37e6e07d468f3bea6b5ff6752d470e6f91b2f99",
+    "models/tifa/assets/LstmG2p-Eng/phonemes.json": "4c2e4f50744a88993cda3e7a8f208f5d0e9198995163a1cf5ea71258278b6a85",
+    "models/tifa/assets/LstmG2p-Eng/config.json": "72357a005ff51874041086583a2ad2537842b4b0635fe8e6df31d090d54bb77a",
+    "models/tifa/assets/LstmG2p-Eng/char.json": "99db14a8dfeb313f7190b80098693c02d5b7530af282ef6fe81c4da0cd982138",
+    "models/tifa/assets/LstmG2p-Eng/encoder.onnx": "00c6475b6a4c28389f236ca9985157c9b59fe2eabddb4f44d562c999194d7645"
+  },
+  "commits": {
+    "SOFA": "584d6b9a57927843f85decebf4cbf03b9598125f",
+    "TIFA": "7b210ca36ff5a2b79187fb1727af58fc977cc301"
+  }
+}

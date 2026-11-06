@@ -1,0 +1,68 @@
+model:
+  arch: ForcedAlignmentModel
+  max_vocab_size: 256
+  in_dim: 80
+  embedding_dim: 256
+  out_dim: 256
+  backbone:
+    cls: modules.backbones.jebf.JEBFBackbone
+    kwargs:
+      dim: 256
+      num_layers: 8
+      num_heads: 8
+      head_dim: 64
+      attn_type: joint
+      ffn_type: glu
+      qk_norm: true
+      use_rope: true
+inference:
+  g2p:
+    preprocessors:
+    - id: filter-punctuation
+      kwargs: {}
+    - id: strip-whitespace
+      kwargs: {}
+    - id: lowercase
+      kwargs: {}
+    converters:
+    - id: chinese-pinyin
+      language: null
+      kwargs:
+        dict_path: '@dictionaries/ds-zh-pinyin-lite.txt'
+    - id: japanese-mecab
+      language: null
+      kwargs:
+        dict_path: '@dictionaries/japanese_dict_full.txt'
+        nbest: 32
+        double_written_sokuon: false
+    - id: yue-jyutping
+      kwargs:
+        dict_path: '@dictionaries/jyutping_dict.txt'
+    - id: lstm
+      language: en
+      kwargs:
+        dict_path: '@dictionaries/ds_cmudict-07b.txt'
+        model_path: '@assets/LstmG2p-Eng'
+        beam_size: 16
+    - id: dictionary
+      language: zh
+      kwargs:
+        dict_path: '@dictionaries/ds-zh-pinyin-lite.txt'
+    - id: dictionary
+      language: ja,jpn
+      kwargs:
+        dict_path: '@dictionaries/japanese_dict_full.txt'
+    - id: dictionary
+      language: yue
+      kwargs:
+        dict_path: '@dictionaries/jyutping_dict.txt'
+  features:
+    audio_sample_rate: 48000
+    hop_size: 480
+    fft_size: 2048
+    win_size: 2048
+    spectrogram:
+      type: mel
+      num_bins: 80
+      fmin: 0.0
+      fmax: 8000.0

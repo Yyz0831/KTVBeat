@@ -1,0 +1,19 @@
+# Only the formal application belongs in this repository.
+/tools/
+/evaluation/
+/downloads/
+/logs/
+/应用入口.md
+.DS_Store
+.ruff_cache/
+__pycache__/
+*.py[cod]
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+
+# Keep only the formal app launcher; experimental tools stay local.
+/launchers/*
+!/launchers/启动 KTVBeat 播放器.command

@@ -1,0 +1,26 @@
+converters:
+- id: chinese-pinyin
+  kwargs:
+    dict_path: '@dictionaries/ds-zh-pinyin-lite.txt'
+  language: null
+- id: dictionary
+  kwargs:
+    dict_path: '@evaluation-english.txt'
+  language: en
+- id: lstm
+  kwargs:
+    beam_size: 16
+    dict_path: '@dictionaries/ds_cmudict-07b.txt'
+    model_path: '@assets/LstmG2p-Eng'
+  language: en
+- id: dictionary
+  kwargs:
+    dict_path: '@dictionaries/ds-zh-pinyin-lite.txt'
+  language: zh
+preprocessors:
+- id: filter-punctuation
+  kwargs: {}
+- id: strip-whitespace
+  kwargs: {}
+- id: lowercase
+  kwargs: {}

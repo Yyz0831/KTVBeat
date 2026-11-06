@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+runtime/*
+!runtime/*.lock.txt
+models/**/*.ckpt
+models/**/*.pt
+models/**/*.onnx
+player/node_modules/
+data/
+records/
+bin/
+models/tifa/dictionaries/
+vendor/TIFA/dictionaries/
+player/*记录.txt
+验收结果.md
+
+# Historical local migration and experiment automation are not installation tools.
+scripts/bootstrap_from_tests.py
+scripts/migrate_library.py
+scripts/cleanup_legacy.py
+scripts/finish_acceptance.py
+scripts/monitor_acceptance.mjs
+scripts/accept_*.mjs

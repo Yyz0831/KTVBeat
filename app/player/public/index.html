@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101014">
+  <title>KTVBeat · 三轨播放器</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23b8a2fa'/%3E%3Cpath d='M19 17v30m25-30L25 32l19 15' fill='none' stroke='%23101014' stroke-width='7'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/lyrics.css">
+  <link rel="stylesheet" href="/upload.css">
+  <script type="module" src="/app.js"></script>
+  <script type="module" src="/upload.js"></script>
+</head>
+<body class="lyrics-player">
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="icon-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
+      <symbol id="icon-music" viewBox="0 0 24 24"><path d="M9 17V6l11-2v11M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></symbol>
+      <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8zM2 12l10 5 10-5M2 16l10 5 10-5"/></symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24"><path d="M11 4 5 9H2v6h3l6 5zM15 8a6 6 0 0 1 0 8M18 4a11 11 0 0 1 0 16"/></symbol>
+      <symbol id="icon-headphones" viewBox="0 0 24 24"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><rect x="2" y="12" width="5" height="9" rx="2"/><rect x="17" y="12" width="5" height="9" rx="2"/></symbol>
+    </defs>
+  </svg>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="KTVBeat 首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>KTV<span>Beat</span><small>PLAYER</small></a>
+      <div class="local-label"><span></span>本地音乐空间</div>
+    </header>
+    <div class="workspace">
+      <aside class="library" aria-label="歌曲列表">
+        <div class="section-heading"><h2>我的歌曲</h2><span id="song-count" class="count">03</span></div>
+        <p class="library-description">选择一首，唱自己的版本。</p>
+        <button id="add-song" class="add-song" type="button">＋ 添加歌曲</button>
+        <nav id="song-list" aria-label="选择歌曲"></nav>
+        <div class="library-note"><svg class="icon"><use href="#icon-headphones"/></svg><p>伴奏、主唱、和声<br><span>一首歌，三种声音。</span></p></div>
+        <section class="job-section" aria-label="处理任务"><h3>处理任务 <span id="job-count"></span></h3><p id="job-empty">上传歌曲和歌词后，任务会显示在这里。</p><p id="job-connection" role="status"></p><div id="job-list" class="job-list"></div></section>
+      </aside>
+      <main>
+        <section class="now-playing" aria-labelledby="song-title">
+          <div class="song-info">
+            <div class="eyebrow"><span class="tiny-line"></span>YOUR STAGE, YOUR MIX</div>
+            <h1 id="song-title">周旋</h1>
+            <p id="song-artist" class="artist">王以太,艾热 AIR</p>
+            <div class="song-tags"><span>三轨混音</span><span id="song-duration-tag">04:50</span></div>
+          </div>
+          <div id="cover" class="cover violet" aria-hidden="true">
+            <div class="cover-grid"></div><div class="record"><div class="record-center"></div></div>
+            <span class="cover-brand">K / B</span><span class="cover-title" id="cover-title">周旋</span><span class="cover-caption">THE THREE TRACK SESSIONS</span>
+          </div>
+        </section>
+        <section class="lyrics-panel" aria-label="同步歌词">
+          <div class="lyrics-toolbar">
+            <div class="lyrics-heading"><span class="tiny-line"></span>跟着音乐唱</div>
+            <div class="lyrics-modes" role="group" aria-label="歌词显示模式">
+              <button type="button" data-lyrics-mode="scroll" aria-pressed="true">滚动歌词</button>
+              <button type="button" data-lyrics-mode="ktv" aria-pressed="false">KTV 双行</button>
+            </div>
+          </div>
+          <div id="lyrics-stage" class="lyrics-stage">
+            <div id="lyrics-empty" class="lyrics-empty"><strong id="lyrics-empty-title">正在加载歌词</strong><p id="lyrics-empty-detail">准备好后，歌词会跟随音乐同步显示。</p><button id="lyrics-retry" type="button" hidden>重试歌词</button></div>
+            <div id="lyrics-scroll" class="lyrics-scroll" tabindex="0" aria-label="歌词列表，可点击跳转" hidden><div id="lyrics-lines" class="lyrics-lines"></div></div>
+            <div id="lyrics-ktv" class="lyrics-ktv" aria-label="交替演唱歌词" hidden><div id="lyrics-top" class="ktv-slot ktv-top"></div><div id="lyrics-bottom" class="ktv-slot ktv-bottom"></div></div>
+            <button id="lyrics-follow" class="lyrics-follow" type="button" hidden>回到当前 ↓</button>
+          </div>
+          <div class="lyrics-footnote"><span id="lyrics-status" role="status" aria-live="polite">准备歌词</span><span class="lyrics-click-hint">点击歌词，跳到这一句</span></div>
+        </section>
+        <section class="transport" aria-label="三轨共用播放控制">
+          <div class="timeline-labels"><div class="timeline-current"><span class="timeline-caption">全曲进度</span><span id="current-time">00:00</span></div><span id="total-time">04:50</span></div>
+          <label class="sr-only" for="progress">三轨共同播放进度</label>
+          <input id="progress" class="progress" type="range" min="0" max="290.73" value="0" step="0.01" disabled>
+          <div class="transport-bottom">
+            <button id="play" class="play-button" type="button" aria-label="播放" disabled><svg class="icon"><use id="play-icon" href="#icon-play"/></svg></button>
+            <div class="play-status"><strong id="status-title">准备音乐</strong><span id="status-detail" role="status" aria-live="polite">正在获取歌曲列表…</span></div>
+            <div class="master-control">
+              <label for="volume-master"><svg class="icon"><use href="#icon-volume"/></svg>总音量</label>
+              <input id="volume-master" type="range" min="0" max="100" value="50" data-volume="master">
+              <output id="value-master" for="volume-master">50<span>%</span></output>
+            </div>
+          </div>
+          <div id="error-panel" class="error-panel" role="alert" hidden><span id="error-text"></span><button id="retry" type="button">重新加载</button></div>
+        </section>
+        <section class="mixer" aria-labelledby="mixer-title">
+          <div class="mixer-heading"><div><h2 id="mixer-title">调出你的声音</h2><p>三轨同步播放，音量由你掌控。</p></div><span class="sync-badge"><span></span>共用进度</span></div>
+          <div class="track-grid">
+            <article class="track-card instrumental">
+              <div class="track-heading"><span class="track-icon"><svg class="icon"><use href="#icon-music"/></svg></span><span class="track-number">01</span></div>
+              <label for="volume-instrumental">伴奏<small>INSTRUMENTAL</small></label>
+              <div class="track-value"><output id="value-instrumental" for="volume-instrumental">100<span>%</span></output><span id="state-instrumental">已开启</span></div>
+              <input id="volume-instrumental" type="range" min="0" max="100" value="100" data-volume="instrumental" aria-label="伴奏音量">
+              <div class="range-labels"><span>静音</span><span>最大</span></div>
+            </article>
+            <article class="track-card lead is-muted">
+              <div class="track-heading"><span class="track-icon"><svg class="icon"><use href="#icon-mic"/></svg></span><span class="track-number">02</span></div>
+              <label for="volume-lead">主唱<small>LEAD VOCALS</small></label>
+              <div class="track-value"><output id="value-lead" for="volume-lead">0<span>%</span></output><span id="state-lead">已静音</span></div>
+              <input id="volume-lead" type="range" min="0" max="100" value="0" data-volume="lead" aria-label="主唱音量">
+              <div class="range-labels"><span>静音</span><span>最大</span></div>
+            </article>
+            <article class="track-card backing">
+              <div class="track-heading"><span class="track-icon"><svg class="icon"><use href="#icon-layers"/></svg></span><span class="track-number">03</span></div>
+              <label for="volume-backing">和声<small>BACKING VOCALS</small></label>
+              <div class="track-value"><output id="value-backing" for="volume-backing">100<span>%</span></output><span id="state-backing">已开启</span></div>
+              <input id="volume-backing" type="range" min="0" max="100" value="100" data-volume="backing" aria-label="和声音量">
+              <div class="range-labels"><span>静音</span><span>最大</span></div>
+            </article>
+          </div>
+          <p class="mixer-tip"><svg class="icon"><use href="#icon-mic"/></svg>主唱默认静音，把舞台留给你。需要原唱引导时，轻轻拉高即可。</p>
+        </section>
+      </main>
+    </div>
+    <footer><span>KTVBeat <span class="footer-dot">·</span> 三轨播放器</span><span>让每一种声音，恰到好处。</span></footer>
+  </div>
+<dialog id="upload-dialog" class="upload-dialog" aria-labelledby="upload-heading">
+    <form id="upload-form"><h2 id="upload-heading">添加一首歌</h2><p>选择音频和对应的逐句歌词。处理时可以继续听歌，也可以添加下一首。</p>
+      <label>音频文件<input id="upload-audio" name="audio" type="file" accept=".mp3,.flac,.ncm" required></label>
+      <label>歌词文件<input id="upload-lyrics" name="lyrics" type="file" accept=".lrc,.lyc" required></label>
+      <div class="upload-fields"><label>歌名<input id="upload-title" name="title" maxlength="200" placeholder="从文件名或音频信息读取"></label><label>歌手<input id="upload-artist" name="artist" maxlength="200" placeholder="从音频信息读取"></label></div>
+      <p id="upload-limits">MP3 / FLAC / NCM，音频不超过 256 MiB、20 分钟；LRC / LYC 不超过 1 MiB。</p><p id="upload-message" role="status" aria-live="polite"></p>
+      <div class="upload-actions"><button id="upload-close" type="button">关闭</button><button id="upload-submit" type="submit">上传并处理</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

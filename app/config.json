@@ -1,0 +1,10 @@
+{
+  "version": "0.3.0",
+  "audioMaxBytes": 268435456,
+  "lyricsMaxBytes": 1048576,
+  "maxDurationSeconds": 1200,
+  "minFreeBytes": 1073741824,
+  "maxQueuedJobs": 20,
+  "cpuThreads": 4,
+  "pollMilliseconds": 2000
+}

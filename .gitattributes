@@ -1,0 +1,9 @@
+*.js text eol=lf
+*.mjs text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.command text eol=lf
+# Preserve upstream bytes and model-resource checksums across checkouts.
+app/vendor/** -text
+app/models/** -text
+app/licenses/** -text

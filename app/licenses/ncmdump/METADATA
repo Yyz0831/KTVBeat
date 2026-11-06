@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: ncmdump
+Version: 0.1.1
+Summary: netease cloud music copyright protection file dump
+Home-page: http://github.com/nondanee/ncmdump
+Author: nondanee
+Author-email: iminezn5656@outlook.com
+License: MIT
+Keywords: ncm,netease cloud music
+Platform: any
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
+Requires-Dist: mutagen
+Requires-Dist: pycryptodome
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: platform
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
